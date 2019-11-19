@@ -3,7 +3,9 @@ function registration=MRF(imageI, imageJ,maxIteration)
 %[width,height,bands]=size(imageI);
 %image=imstack2vectors(imageI);
 
-moving = imhistmatch(imageI,imageJ);
+%moving = imhistmatch(imageI,imageJ);
+
+% Image rigid registration before the Non-Rigid one.
 [D,movingReg] = imregdemons(imageI,imageJ,[500 400 200],'AccumulatedFieldSmoothing',1.3);
     
 %GCO_LoadLib();
