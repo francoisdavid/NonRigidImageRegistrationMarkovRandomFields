@@ -26,7 +26,7 @@ T = zeros(512, 512 ,2 );
     while(iteration  < maxIteration)
         x = ComputeLabeling(imageI, imageJ, T, L);
       
-        energyNow = EnergyOfField(imageI, imageJ, UpdateTransformation(T,x))
+        energyNow = EnergyOfField(imageI, imageJ, UpdateTransformation(T,x));
         if(currentEnergy > energyNow)
              T = UpdateTransformation(T,x);
              currentEnergy = energyNow;
