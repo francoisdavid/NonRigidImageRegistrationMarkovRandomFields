@@ -6,12 +6,11 @@ for i = 1:512
             minEnergy = 999999999999;
             label = [0 0];
         for k = 1:size(L(:,1))
-            energyOfLabel =  EnergyOfLabel(I,J, i,j,L(k,:), T, x);
-            %energyOfLabel = EnergyOfField(I,J, UpdateTransformation(T, x(i,j,:)))
+            %energyOfLabel =  EnergyOfLabel(I,J, i,j,L(k,:), T, x);
+            energyOfLabel = Ene
             if(energyOfLabel< minEnergy)
                 label = L(k,:); 
                 minEnergy = energyOfLabel;
-                
             end
             x(i,j,:) = label;
         end
