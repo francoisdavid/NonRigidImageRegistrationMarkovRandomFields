@@ -6,7 +6,7 @@ function registration=MRF(imageI, imageJ,maxIteration)
 %moving = imhistmatch(imageI,imageJ);
 
 % Image rigid registration before the Non-Rigid one.
-[D,movingReg] = imregdemons(imageI,imageJ,[500 400 200],'AccumulatedFieldSmoothing',1.3);
+[,movingReg] = imregdemons(imageI,imageJ,[500 400 200],'AccumulatedFieldSmoothing',1.3);
     
 %GCO_LoadLib();
 %L = gco_matlab('gco_create_general',int32(512*512),int32(100));
@@ -31,13 +31,13 @@ T = zeros(512, 512 ,2 );
     while(iteration  < maxIteration)
         x = ComputeLabeling(imageI, imageJ, T, L);
       
-        energyNow = EnergyOfField(imageI, imageJ, UpdateTransformation(T,x))
+        energyNow = EnergyOfField(imageI, imageJ, UpdateTransformation(T,x));
         if(currentEnergy > energyNow)
              T = UpdateTransformation(T,x);
              L = RefineLabelSpace(L, 0.9);
-             currentEnergy = energyNow
+             currentEnergy = energyNow;
         end
-        iteration = iteration + 1
+        iteration = iteration + 1;
     end
     registration =  imwarp(imageI, T);
 end
