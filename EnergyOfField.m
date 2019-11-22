@@ -5,9 +5,21 @@ for i = 1:512
     for j = 1:512
         % Calculates the difference between each end point (after transformation) of a pixel and point in static image.  
         energy = energy + abs((I(i+T(i,j,1),j+T(i,j,2)) - J(i,j)));
+        if i~= 512
+            energy = energy + abs((I(i+1+T(i+1,j,1),j+T(i+1,j,2)) - J(i+1,j)));
+        end
+        if i~=1 
+            energy = energy + abs((I(i-1+T(i-1,j,1),j+T(i-1,j,2)) - J(i-1,j)));
+        end
+        if j~= 512 
+            energy = energy + abs((I(i+T(i,j+1,1),j+1+T(1,j+1,2)) - J(i,j+1)));
+        end
+        if j~=1
+            energy = energy + abs((I(i+T(i,j-1,1),j-1+T(i,j-1,2)) - J(i,j-1)));
+        end
     end
 end
-a = 30; % Smoothing factor.
+a = 6; % Smoothing factor.
 % Cliques potential.
 for i = 1:511
     for j=1:511

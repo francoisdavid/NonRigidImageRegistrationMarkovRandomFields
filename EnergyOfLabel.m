@@ -1,7 +1,7 @@
 
 function e = EnergyOfLabel(I,J,i,j,L,T, x)
 	e = 0;
-    a = 30;
+    a = 3.5;
     
     potentialx = i+ T(i,j,1)+L(1);
     potentialy = j + T(i,j,2)+L(2);
@@ -9,6 +9,22 @@ function e = EnergyOfLabel(I,J,i,j,L,T, x)
       
         e = e +  abs((minus(I(potentialx ,potentialy), J(i,j))));
 
+         
+        % Calculating the energy of the different neighboring cells
+        if potentialx ~= 512 && i ~= 512
+            e = e + abs((minus(I(potentialx+1 ,potentialy), J(i+1,j))));
+        end 
+        if potentialx ~= 1 && i ~= 1 
+             e = e + abs((minus(I(potentialx-1 ,potentialy), J(i-1,j))));
+        end
+        if potentialy ~= 512  && j~= 512
+             e = e + abs((minus(I(potentialx ,potentialy+1), J(i,j+1))));
+        end
+        if potentialy ~= 1 && j ~= 1
+             e = e + abs((minus(I(potentialx ,potentialy-1), J(i,j-1))));
+        end
+
+        
         if(i ~= 512)
              % Right clique energy calculations.
              x1 = i+L(1)+T(i,j,1) + x(i,j,1);
