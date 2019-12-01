@@ -13,27 +13,39 @@ imageI=double(Im);
 %J = dicomread(info); % image that will be static. 
 imageJ = double(imageJ);
 
-% Initialize the labeling. (For dicom files, it needs to have the 
+% Initialize the labeling. 
 L = initialiseLabelSpace(60,5);
 
 % Transformation matrix of 2D vectors. 
 T = zeros(512, 512 ,2 );
-
-    iteration = 1;
-    % Calculate the current energy of the field.
-    currentEnergy = EnergyOfField(imageI, imageJ, T);
-    while(iteration  < maxIteration)
-        x = ComputeLabeling(imageI, imageJ, T, L);
-        energyNow = EnergyOfField(imageI, imageJ, UpdateTransformation(T,x))
-        if(currentEnergy > energyNow)
-             T = UpdateTransformation(T,x);
-             currentEnergy = energyNow;
-        else 
-             L = RefineLabelSpace(L, 0.64);
-        end
-        iteration = iteration + 1
-    end
-    
-    registration = T;% imwarp(imageI, T);
-    %imshow(imwarp(imageI, T), []);
+iteration = 1;
+% Calculate the current energy of the field.
+currentEnergy = EnergyOfField(imageI, imageJ, T);
+% Used for convergence. 
+while(iteration  < maxIteration)
+        % Compute the current labelling. Store the matrix of labels in the
+        % variables X. 
+       x = ComputeLabeling(imageI, imageJ, T, L);
+       % Calculate the energy of the field with the transformation calculated
+       % above + the current transformation to the image. 
+       energyNow = EnergyOfField(imageI, imageJ, UpdateTransformation(T,x));
+       % If the energy newly calculate witht the current labelling is smaller,
+       % update the current transformation.
+       if(currentEnergy > energyNow)
+           % Update transformation. 
+            T = UpdateTransformation(T,x);
+            %update the value of the current energy of the field. 
+            currentEnergy = energyNow;
+       else 
+           % If not, then we refine the labelling so that the new labelling
+           % might change the current energy of the field. If not changed, it
+           % would stay the same. 
+            L = RefineLabelSpace(L, 0.67);
+       end
+       iteration = iteration + 1;
 end
+    % Return the transformation field. 
+    registration = T;
+
+end
+
