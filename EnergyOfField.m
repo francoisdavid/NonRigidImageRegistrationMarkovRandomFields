@@ -19,7 +19,7 @@ for i = 1:512
         end
     end
 end
-a = 6; % Smoothing factor.
+a = 600; % Smoothing factor.
 % Cliques potential.
 for i = 1:511
     for j=1:511

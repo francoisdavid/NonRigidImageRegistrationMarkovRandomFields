@@ -1,13 +1,14 @@
 
 function e = EnergyOfLabel(I,J,i,j,L,T, x)
 	e = 0;% The energy is initialized to zero.
-    a = 3.5; % Constant changed with trials & errors to yield arbitrary best resutls.
+    a = 600; % Constant changed with trials & errors to yield arbitrary best resutls.
     potentialx = i+ T(i,j,1)+L(1);% Potential new location of the pixel on the horizontal axis.
     potentialy = j + T(i,j,2)+L(2); %Potential new location of the pixel on the vertical axis.
     % Check that the potential labelling do not map pixels out of the scope
     % of the image. 
     if potentialx > 0 && potentialy > 0 && potentialx < 513 && potentialy <513  
         % Calculate the energy of the 
+       
         e = e +  abs((minus(I(potentialx ,potentialy), J(i,j))));
         % Calculating the energy of the different neighboring cells
         % while making sure that the neighbouring cells exist.
@@ -56,6 +57,6 @@ function e = EnergyOfLabel(I,J,i,j,L,T, x)
               e = e + a * abs(sqrt( (x2-x1)^2 + (y2 - y1)^2));
         end
     else 
-       e = maxint; 
+       e = intmax; 
     end
 end
