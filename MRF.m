@@ -20,9 +20,11 @@ L = initialiseLabelSpace(25,5);
 T = zeros(512, 512 ,2 );
 iteration = 1;
 
+energyGraph = [];
 
 % Calculate the current energy of the field.
 currentEnergy = EnergyOfField(imageI, imageJ,T);
+
 % Used for convergence. 
 while(iteration  < maxIteration)
         % Compute the current labelling. Store the matrix of labels in the
@@ -36,6 +38,10 @@ while(iteration  < maxIteration)
        if(currentEnergy > energyNow)
            % Update transformation. 
             T = UpdateTransformation(T,x);
+            
+            %Store energy in an array
+            energyGraph = [energyGraph, currentEnergy]
+            
             %update the value of the current energy of the field. 
             currentEnergy = energyNow;
        else 
@@ -48,9 +54,9 @@ while(iteration  < maxIteration)
        currentEnergy
 end
     % Return the transformation field. 
-    registration =imwarp(imageI,T),imageJ );
+    registration =imwarp(imageI,T);
     SADBefore = SAD(I, imageJ)
-    SADAfter = SAD(imwarp(imageI,T),imageJ )
+    SADAfter = SAD(registration, imageJ)
     
 end
 
