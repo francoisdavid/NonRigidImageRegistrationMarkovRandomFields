@@ -1,5 +1,5 @@
 function registration=MRF(imageI, imageJ,maxIteration)
-
+I = imageI;
 [~,imageI] = imregdemons(imageI,imageJ,[500 400 200],'AccumulatedFieldSmoothing',1.3);
   
 %GCO_LoadLib();
@@ -48,6 +48,6 @@ while(iteration  < maxIteration)
        currentEnergy
 end
     % Return the transformation field. 
-    registration = SAD(imwarp(imageI,T),imageJ )/ SAD(imageI, imageJ);
+    registration = SAD(imwarp(imageI,T),imageJ )/ SAD(I, imageJ);
 end
 
