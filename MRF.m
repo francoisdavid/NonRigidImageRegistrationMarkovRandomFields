@@ -48,6 +48,9 @@ while(iteration  < maxIteration)
        currentEnergy
 end
     % Return the transformation field. 
-    registration = SAD(imwarp(imageI,T),imageJ )/ SAD(I, imageJ);
+    registration =imwarp(imageI,T),imageJ );
+    SADBefore = SAD(I, imageJ)
+    SADAfter = SAD(imwarp(imageI,T),imageJ )
+    
 end
 
