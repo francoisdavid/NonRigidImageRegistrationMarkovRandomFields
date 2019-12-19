@@ -2,8 +2,8 @@
 function L=initialiseLabelSpace(dmax, scale)
 % Start it with the null vector.
 L = [0 0];
-% Iterate through the given scaling.  
 currentMax = dmax;
+% Iterate through the given scaling.  
 for i = 1:scale
      % Calulate the max of the vectors currently. 
      currentMax = (dmax/scale) *i;
