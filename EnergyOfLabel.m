@@ -1,4 +1,4 @@
-
+% Function called by the computeLabeling function which calculates the energy of a given label at a certain possition depending on the image I and J and the current deformation field.
 function e = EnergyOfLabel(I,J,i,j,L,T, x)
 	e = 0;% The energy is initialized to zero.
     a = 600; % Constant changed with trials & errors to yield arbitrary best resutls.
