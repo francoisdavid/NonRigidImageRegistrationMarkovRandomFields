@@ -1,16 +1,11 @@
 function registration=MRF(imageI, imageJ,maxIteration)
+% Save the original image to a variable that will be used to calculate the SADBefore at the end.
 I = imageI;
+% Linear registration like in the paper.
 [~,imageI] = imregdemons(imageI,imageJ,[500 400 200],'AccumulatedFieldSmoothing',1.3);
-  
-%GCO_LoadLib();
-%L = gco_matlab('gco_create_general',int32(512*512),int32(100));
 
-%infoI = dicominfo('thorac2.dcm');
-%I=dicomread(infoI); % image that will be transformed.
+% Make the 2 images as double for computations. 
 imageI=double(imageI);
-
-%info = dicominfo('thorac.dcm');
-%J = dicomread(info); % image that will be static. 
 imageJ = double(imageJ);
 
 % Initialize the labeling. 
@@ -19,8 +14,6 @@ L = initialiseLabelSpace(25,5);
 % Transformation matrix of 2D vectors. 
 T = zeros(512, 512 ,2 );
 iteration = 1;
-
-energyGraph = [];
 
 % Calculate the current energy of the field.
 currentEnergy = EnergyOfField(imageI, imageJ,T);
@@ -38,9 +31,6 @@ while(iteration  < maxIteration)
        if(currentEnergy > energyNow)
            % Update transformation. 
             T = UpdateTransformation(T,x);
-            
-            %Store energy in an array
-            energyGraph = [energyGraph, currentEnergy]
             
             %update the value of the current energy of the field. 
             currentEnergy = energyNow;
