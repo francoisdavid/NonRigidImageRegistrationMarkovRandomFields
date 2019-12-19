@@ -1,5 +1,7 @@
+% Function that generates a displacement field x, that can be added to the general displacement field T 
+% of the image I to J depending on the label space L. 
 function x=ComputeLabeling(I,J,T,L)
-% The new labeling is initialized to zero.
+% The new labeling is initialized to zero. The size of this variable could vary with respect to the size of image I and J.
 x = zeros(512,512,2); 
 for i = 1:512
     for j = 1:512
