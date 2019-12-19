@@ -1,47 +1,16 @@
+% Function used to initialise the label space depending on the max length of the vectors and the scaling. 
 function L=initialiseLabelSpace(dmax, scale)
+% Start it with the null vector.
 L = [0 0];
+% Iterate through the given scaling.  
 currentMax = dmax;
 for i = 1:scale
+     % Calulate the max of the vectors currently. 
      currentMax = (dmax/scale) *i;
+     % Add the new label vectors.
      L = [L;
          currentMax 0;
          -currentMax 0;
          0 currentMax; 
          0 -currentMax;];
 end
-
-
-currentMax; 
-
-
-
-
-
-
-L
-% To select
-%L = L(2,:);
-% 
-% function L=initialiseLabelSpace(dmax, scale)
-% L = [0 0];
-% currentMax = dmax;
-% for i = 1:scale
-%      currentMax = (dmax/scale) *i;
-%      %diag = curentMax * currentMax / sqrt(3* currentMax * currentMax);
-%      L = [L;
-%          currentMax 0;
-%          -currentMax 0;
-%          0 currentMax; 
-%          0 -currentMax;];
-%         %diag,  diag;
-%         %diag,-diag;
-%         %-diag,diag;
-%         %-diag,-diag];
-% end
-% 
-
-
-
-
-
-
