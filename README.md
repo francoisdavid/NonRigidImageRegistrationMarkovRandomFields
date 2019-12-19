@@ -45,3 +45,5 @@ subplot(3,1,3)
 imshow(J,[]);
 title("Image J");
 ```
+
+#### More images used can be found in the bin.zip file.
