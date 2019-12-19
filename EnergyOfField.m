@@ -1,3 +1,4 @@
+% Function used to calculate the overall energy of the field accordinf to the SAD and the clique energy generated.
 function e=EnergyOfField(I,J,T)
 energy = 0 ; 
 % Energy of every pixels.
