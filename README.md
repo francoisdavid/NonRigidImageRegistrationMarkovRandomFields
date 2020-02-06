@@ -1,5 +1,5 @@
 # NonRigidImageRegistrationMarkovRandomFields
-
+Algorithm using a MRF for image registration.
 
 ## How to use the algorithm.
 
